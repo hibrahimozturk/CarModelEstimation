@@ -12,13 +12,13 @@ function imgs = takeframes(v_name)
         videof = readFrame(v);
         current_f = double(videof);
         
-        if(counter ==1 && counter_2 > 6300)
+        if(counter ==1 && counter_2 > 0)
             %take memory for imgs
             [r,c,d] = size(imresize(current_f, 0.4));
             imgs = zeros(r,c,d,2100);
         end
         
-        if(counter_2 >4200)
+        if(counter_2 >0)
             imgs(:,:,:,counter) = imresize(current_f, 0.4);
             counter = counter + 1;
         end

@@ -2,13 +2,16 @@ function [models, maxNumOfFeatures] = readModels(infoPath)
 
 info = readInfo(infoPath);
 maxNumOfFeatures = 0;
-models = struct('modelDef', 'model', 'modelFeatures', 'sift');
+models = struct('modelDef', 'model', 'modelFeatures', 'sift', 'modelPath', 'path');
 
 for i=1:length(info)
     models(i).modelDef = info(i).modelDef;
+    models(i).modelPath = info(i).modelPath;
     img = rgb2gray(imresize(imread(info(i).modelPath), 0.4));
     surfPoints = detectSURFFeatures(img);
     [features, centers] = extractFeatures(img, surfPoints);
+%     [points, features] = vl_sift(single(img));
+%     features = features';
     if(size(features, 1) > maxNumOfFeatures)
         maxNumOfFeatures = size(features, 1);        
     end
